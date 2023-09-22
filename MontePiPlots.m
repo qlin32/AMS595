@@ -1,7 +1,8 @@
+%assigning variables
 n_values = [10,100,500,1000,10000,100000];
-
 execution_times = zeros(size(n_values));
 
+%execution time for each n
 for i = 1:length(n_values)
     n = n_values(i);
     tic;
@@ -9,15 +10,18 @@ for i = 1:length(n_values)
     execution_times(i) = toc;
 end
 
+%1st plot: execution time against n
 figure;
 plot(n_values, execution_times, '-o');
 title('Execution Time against n');
 xlabel('Number of Points');
 ylabel('Execution Time');
+saveas (gcf,"1st_plot.png")
 
 approx = zeros(size(n_values));
 abser = zeros(size(n_values));
 
+%calculating pi approximation and absolute error
 for i = 1:length(n_values)
     n = n_values(i);
     [appro, abse, ~] = MontePi(n); 
@@ -25,12 +29,16 @@ for i = 1:length(n_values)
     abser(i) = abse;
 end
 
+%2nd plot: absolute error against n
 figure;
 plot(n_values, abser,'-o');
 title("Absolute error against n");
 xlabel("Number of points");
 ylabel("Absolute Error");
+saveas (gcf,"2nd_plot.png")
 
+
+%setting fixed n and counter num
 fix_n = 180;
 num = 0;
 xin=[];
@@ -38,6 +46,7 @@ yin=[];
 xout=[];
 yout=[];
 
+%3rd plot: plotting the points while they're generated
 figure;
 xlabel('x');
 ylabel('y');
@@ -61,3 +70,5 @@ for i = 1:fix_n
 end
 
 title("Pi Approximation is : ", num2str(4*num/fix_n))
+saveas (gcf,"3rd_plot.png")
+
